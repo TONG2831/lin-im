@@ -1,6 +1,5 @@
 package com.xyz.im.service.im;
 
-import com.alibaba.fastjson.JSON;
 import com.xyz.im.base.exception.BusinessException;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
@@ -48,7 +47,7 @@ public class NettyHandler extends SimpleChannelInboundHandler<TextWebSocketFrame
     @Override
     public void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) {
         // 取出消息体 根据消息体信息 决定消息发送
-        MsgBody msgBody = JSON.parseObject(msg.text(), MsgBody.class);
+//        MsgBody msgBody = JSON.parseObject(msg.text(), MsgBody.class);
         log.info("收到消息 msg={}", msg.text());
 
         sendAllMessages(ctx, msg);
@@ -96,7 +95,7 @@ public class NettyHandler extends SimpleChannelInboundHandler<TextWebSocketFrame
      * 给某个人发送消息
      */
     private void sendMessage(ChannelHandlerContext ctx, TextWebSocketFrame msg) {
-        MsgBody msgBody = JSON.parseObject(msg.text(), MsgBody.class);
+//        MsgBody msgBody = JSON.parseObject(msg.text(), MsgBody.class);
 
         ctx.channel().writeAndFlush(msg);
     }
@@ -105,7 +104,7 @@ public class NettyHandler extends SimpleChannelInboundHandler<TextWebSocketFrame
      * 给每个人发送消息,除发消息人外
      */
     private void sendAllMessages(ChannelHandlerContext ctx, TextWebSocketFrame msg) {
-        MsgBody msgBody = JSON.parseObject(msg.text(), MsgBody.class);
+//        MsgBody msgBody = JSON.parseObject(msg.text(), MsgBody.class);
 
         for (Channel channel : channelGroup) {
             if (!channel.id().asLongText().equals(ctx.channel().id().asLongText())) {
