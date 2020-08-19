@@ -1,0 +1,31 @@
+ftp:
+  host: xxx
+  port: 21
+  timeout: 20000
+  username: xxx
+  password: xxx
+
+spring:
+  profiles:
+    active: dev
+
+  mail:
+    host: smtp.qq.com
+    username: xxx
+    password: xxx
+    protocol: smtp
+    default-encoding: UTF-8
+
+  freemarker:
+    template-loader-path: classpath:/templates/
+    cache: false
+    charset: UTF-8
+    check-template-location: true
+    content-type: text/html
+    expose-request-attributes: true
+    expose-session-attributes: true
+    request-context-attribute: request
+    suffix: .html
+
+logging:
+  config: classpath:config/${spring.profiles.active}/logback.xml

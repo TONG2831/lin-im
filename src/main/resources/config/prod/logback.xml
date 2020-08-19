@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+    <contextName>logs</contextName>
+    <timestamp key="TIMESTAMP" datePattern="yyyy-MM-dd"/>
+    <property name="LOG_PATH" value="/usr/logs/im"/>
+    <property name="LOG_NAME" value="im"/>
+    <property name="SYS_LOG_NAME" value="im-system"/>
+
+
+    <!-- 输出到控制台 -->
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{40} - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+
+    <!-- 输出到文件 -->
+    <appender name="fileLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}${file.separator}${LOG_NAME}.log</file>
+        <append>true</append>
+        <!-- 打印日志的格式 -->
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{40} - %msg%n
+            </pattern>
+        </encoder>
+        <!-- 滚动策略 设置生成新日志文件的策略 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}${file.separator}history${file.separator}%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>180</maxHistory>
+        </rollingPolicy>
+        <!--        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+        <!--            <fileNamePattern>${LOG_PATH}${file.separator}all${file.separator}%d{yyyy-MM-dd HH:mm}.log-->
+        <!--            </fileNamePattern>-->
+        <!--            <maxHistory>30</maxHistory>-->
+        <!--        </rollingPolicy>-->
+        <!--        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">-->
+        <!--            <MaxFileSize>10MB</MaxFileSize>-->
+        <!--        </triggeringPolicy>-->
+    </appender>
+
+    <appender name="SYS_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}${file.separator}${SYS_LOG_NAME}.log</file>
+        <append>true</append>
+        <!-- 打印日志的格式 -->
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{40} - %msg%n
+            </pattern>
+        </encoder>
+        <!-- 滚动策略 设置生成新日志文件的策略 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}${file.separator}history-sys${file.separator}%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>180</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="fileLog"/>
+        <appender-ref ref="stdout"/>
+    </root>
+
+    <!-- 输出mybatis相关日志 -->
+    <!-- 设置additivity为false能够解决打印sql重复打印问题 -->
+    <logger name="com.xyz.im.dao" level="DEBUG" additivity="false">
+        <appender-ref ref="stdout"/>
+    </logger>
+
+    <!-- 系统级日志 -->
+    <logger name="SystemLogger" level="INFO" additivity="false">
+        <appender-ref ref="SYS_LOG"/>
+        <appender-ref ref="stdout"/>
+    </logger>
+
+</configuration>
