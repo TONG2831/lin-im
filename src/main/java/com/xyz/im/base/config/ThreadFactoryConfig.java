@@ -27,4 +27,15 @@ public class ThreadFactoryConfig {
         return executor;
     }
 
+    @Bean("nettyExecutor")
+    public ThreadPoolTaskExecutor nettyExecutor() {
+        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        executor.setCorePoolSize(1);
+        executor.setKeepAliveSeconds(0);
+        executor.setMaxPoolSize(1);
+        executor.setQueueCapacity(0);
+        executor.setThreadNamePrefix("nettyTPool-");
+        return executor;
+    }
+
 }

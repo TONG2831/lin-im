@@ -2,6 +2,7 @@ package com.xyz.im;
 
 import com.xyz.im.base.handler.param.RequestAttributeParamResolver;
 import com.xyz.im.base.log.SysLogUtils;
+import com.xyz.im.web.interceptor.AuthInterceptor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ImportResource;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -43,10 +45,13 @@ public class Application extends WebMvcConfigurationSupport {
         // http://{ip}:{port}/swagger-ui.html
         registry.addResourceHandler("swagger-ui.html").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX + "/META-INF/resources/");
 
-        registry.addResourceHandler("/webjars/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX + "/META-INF/resources/webjars/");
-        registry.addResourceHandler("/static/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX + "/static/");
+//        registry.addResourceHandler("/webjars/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX + "/META-INF/resources/webjars/");
+//        registry.addResourceHandler("/static/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX + "/static/");
         super.addResourceHandlers(registry);
     }
+
+    @Resource
+    private AuthInterceptor authInterceptor;
 
     /**
      * 注册拦截器
@@ -55,6 +60,9 @@ public class Application extends WebMvcConfigurationSupport {
      */
     @Override
     protected void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(authInterceptor)
+                .addPathPatterns(
+                        "/user/**");
     }
 
     /**
