@@ -105,10 +105,9 @@ public class NettyHandler extends SimpleChannelInboundHandler<TextWebSocketFrame
      */
     private void sendAllMessages(ChannelHandlerContext ctx, TextWebSocketFrame msg) {
 //        MsgBody msgBody = JSON.parseObject(msg.text(), MsgBody.class);
-
         for (Channel channel : channelGroup) {
             if (!channel.id().asLongText().equals(ctx.channel().id().asLongText())) {
-                channel.writeAndFlush("this is a test msg hahahahaha");
+                channel.writeAndFlush(new TextWebSocketFrame("this is a test msg hahahahaha"));
             }
         }
     }
