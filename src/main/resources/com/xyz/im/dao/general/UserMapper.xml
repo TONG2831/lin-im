@@ -332,4 +332,12 @@
             </if>
         </trim>
     </insert>
+
+    <select id="selectByUid" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_user
+        where uid = #{uid}
+    </select>
+
 </mapper>

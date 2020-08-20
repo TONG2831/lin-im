@@ -13,4 +13,10 @@ public class LoginResultDto {
     @ApiModelProperty("用户id")
     private long uid;
 
+    @ApiModelProperty("昵称")
+    private String nickname;
+
+    @ApiModelProperty("头像")
+    private String avatar;
+
 }

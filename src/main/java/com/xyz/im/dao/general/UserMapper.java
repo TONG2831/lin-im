@@ -6,8 +6,8 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * @author  xyz
- * @date  2020/8/20
+ * @author xyz
+ * @date 2020/8/20
  */
 public interface UserMapper {
     int insert(User record);
@@ -29,4 +29,6 @@ public interface UserMapper {
     int updateBatchSelective(List<User> list);
 
     int batchInsert(@Param("list") List<User> list);
+
+    User selectByUid(@Param("uid") long uid);
 }

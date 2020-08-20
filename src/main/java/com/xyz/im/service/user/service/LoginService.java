@@ -5,7 +5,9 @@ import com.xyz.im.base.common.Constant;
 import com.xyz.im.base.exception.BusinessException;
 import com.xyz.im.base.utils.EncryptUtils;
 import com.xyz.im.dao.general.AccountMapper;
+import com.xyz.im.dao.general.UserMapper;
 import com.xyz.im.domain.Account;
+import com.xyz.im.domain.User;
 import com.xyz.im.service.auth.cache.AuthCache;
 import com.xyz.im.service.auth.dto.AuthUser;
 import com.xyz.im.service.user.dto.LoginResultDto;
@@ -33,6 +35,9 @@ public class LoginService {
 
     @Resource
     private AccountMapper accountMapper;
+
+    @Resource
+    private UserMapper userMapper;
 
     @Resource
     private AuthCache authCache;
@@ -86,8 +91,17 @@ public class LoginService {
         cookie.setPath("/");
         response.addCookie(cookie);
 
+        // query user info
+        User user = userMapper.selectByUid(resultAccount.getId());
+        if (Objects.isNull(user)) {
+            log.error("account exists but info cannot find uid={}", resultAccount.getId());
+            throw new BusinessException("用户不存在");
+        }
+
         return LoginResultDto.builder()
                 .uid(resultAccount.getId())
+                .nickname(user.getNickname())
+                .avatar(user.getAvatar())
                 .build();
     }
 
