@@ -3,13 +3,13 @@ package com.xyz.im.domain;
 import lombok.Data;
 
 /**
- * 用户表
+ * 群成员表
  *
  * @author xyz
- * @date 2020/8/20
+ * @date 2020/8/21
  */
 @Data
-public class User {
+public class GroupMember {
     private Long id;
 
     /**
@@ -18,19 +18,24 @@ public class User {
     private Long uid;
 
     /**
-     * 昵称
-     */
-    private String nickname;
-
-    /**
-     * 头像
+     * 用户头像
      */
     private String avatar;
 
     /**
-     * 性别 M/W
+     * 用户昵称
      */
-    private String sex;
+    private String nickname;
+
+    /**
+     * 群id
+     */
+    private Long groupId;
+
+    /**
+     * 成员身份 0:普通成员 1:群主
+     */
+    private Byte identity;
 
     /**
      * 添加时间

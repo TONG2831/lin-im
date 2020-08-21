@@ -3,34 +3,24 @@ package com.xyz.im.domain;
 import lombok.Data;
 
 /**
- * 账号表
+ * 群表
  *
  * @author xyz
- * @date 2020/8/20
+ * @date 2020/8/21
  */
 @Data
-public class Account {
+public class Group {
     private Long id;
 
     /**
-     * 账号
+     * 群名称
      */
-    private String account;
+    private String groupName;
 
     /**
-     * 手机号
+     * 群头像
      */
-    private String phone;
-
-    /**
-     * 邮箱
-     */
-    private String mail;
-
-    /**
-     * 密码 加密
-     */
-    private String password;
+    private String groupAvatar;
 
     /**
      * 添加时间

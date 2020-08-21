@@ -1,4 +1,4 @@
-package com.xyz.im;
+package com.xyz.im.base.config;
 
 import com.xyz.im.web.interceptor.OriginCrossInterceptor;
 import org.springframework.context.annotation.Bean;

@@ -4,8 +4,7 @@ CREATE TABLE `t_group` (
   `group_avatar` varchar(256) NOT NULL DEFAULT '' COMMENT '群头像',
   `create_time` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '添加时间',
   `update_time` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '修改时间',
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `uniq_user` (`uid`) USING BTREE
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=10001 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT COMMENT='群表';
 
 CREATE TABLE `t_group_member` (

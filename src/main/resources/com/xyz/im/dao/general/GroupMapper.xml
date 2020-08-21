@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xyz.im.dao.general.GroupMapper">
+    <resultMap id="BaseResultMap" type="com.xyz.im.domain.Group">
+        <!--@mbg.generated-->
+        <!--@Table t_group-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="group_name" jdbcType="VARCHAR" property="groupName"/>
+        <result column="group_avatar" jdbcType="VARCHAR" property="groupAvatar"/>
+        <result column="create_time" jdbcType="BIGINT" property="createTime"/>
+        <result column="update_time" jdbcType="BIGINT" property="updateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, group_name, group_avatar, create_time, update_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from t_group
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.xyz.im.domain.Group" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into t_group (group_name, group_avatar, create_time,
+        update_time)
+        values (#{groupName,jdbcType=VARCHAR}, #{groupAvatar,jdbcType=VARCHAR}, #{createTime,jdbcType=BIGINT},
+        #{updateTime,jdbcType=BIGINT})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.xyz.im.domain.Group"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into t_group
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="groupName != null">
+                group_name,
+            </if>
+            <if test="groupAvatar != null">
+                group_avatar,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="groupName != null">
+                #{groupName,jdbcType=VARCHAR},
+            </if>
+            <if test="groupAvatar != null">
+                #{groupAvatar,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.xyz.im.domain.Group">
+        <!--@mbg.generated-->
+        update t_group
+        <set>
+            <if test="groupName != null">
+                group_name = #{groupName,jdbcType=VARCHAR},
+            </if>
+            <if test="groupAvatar != null">
+                group_avatar = #{groupAvatar,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.xyz.im.domain.Group">
+        <!--@mbg.generated-->
+        update t_group
+        set group_name = #{groupName,jdbcType=VARCHAR},
+        group_avatar = #{groupAvatar,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=BIGINT},
+        update_time = #{updateTime,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateBatch" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update t_group
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="group_name = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.groupName,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="group_avatar = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.groupAvatar,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="create_time = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.createTime,jdbcType=BIGINT}
+                </foreach>
+            </trim>
+            <trim prefix="update_time = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.updateTime,jdbcType=BIGINT}
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.id,jdbcType=BIGINT}
+        </foreach>
+    </update>
+    <update id="updateBatchSelective" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update t_group
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="group_name = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.groupName != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.groupName,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="group_avatar = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.groupAvatar != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.groupAvatar,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="create_time = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.createTime != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.createTime,jdbcType=BIGINT}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="update_time = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.updateTime != null">
+                        when id = #{item.id,jdbcType=BIGINT} then #{item.updateTime,jdbcType=BIGINT}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.id,jdbcType=BIGINT}
+        </foreach>
+    </update>
+    <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into t_group
+        (group_name, group_avatar, create_time, update_time)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.groupName,jdbcType=VARCHAR}, #{item.groupAvatar,jdbcType=VARCHAR},
+            #{item.createTime,jdbcType=BIGINT},
+            #{item.updateTime,jdbcType=BIGINT})
+        </foreach>
+    </insert>
+    <insert id="insertOrUpdate" keyColumn="id" keyProperty="id" parameterType="com.xyz.im.domain.Group"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into t_group
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            group_name,
+            group_avatar,
+            create_time,
+            update_time,
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            #{groupName,jdbcType=VARCHAR},
+            #{groupAvatar,jdbcType=VARCHAR},
+            #{createTime,jdbcType=BIGINT},
+            #{updateTime,jdbcType=BIGINT},
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                id = #{id,jdbcType=BIGINT},
+            </if>
+            group_name = #{groupName,jdbcType=VARCHAR},
+            group_avatar = #{groupAvatar,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=BIGINT},
+            update_time = #{updateTime,jdbcType=BIGINT},
+        </trim>
+    </insert>
+    <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id" parameterType="com.xyz.im.domain.Group"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into t_group
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="groupName != null">
+                group_name,
+            </if>
+            <if test="groupAvatar != null">
+                group_avatar,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="groupName != null">
+                #{groupName,jdbcType=VARCHAR},
+            </if>
+            <if test="groupAvatar != null">
+                #{groupAvatar,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=BIGINT},
+            </if>
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                id = #{id,jdbcType=BIGINT},
+            </if>
+            <if test="groupName != null">
+                group_name = #{groupName,jdbcType=VARCHAR},
+            </if>
+            <if test="groupAvatar != null">
+                group_avatar = #{groupAvatar,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="selectByIds" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_group
+        where id in
+        (
+        <foreach collection="ids" item="id" separator=",">
+            #{id}
+        </foreach>
+        )
+    </select>
+</mapper>
