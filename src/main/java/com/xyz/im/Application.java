@@ -3,6 +3,7 @@ package com.xyz.im;
 import com.xyz.im.base.handler.param.RequestAttributeParamResolver;
 import com.xyz.im.base.log.SysLogUtils;
 import com.xyz.im.web.interceptor.AuthInterceptor;
+import com.xyz.im.web.interceptor.OriginCrossInterceptor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ImportResource;
@@ -63,6 +64,7 @@ public class Application extends WebMvcConfigurationSupport {
         registry.addInterceptor(authInterceptor)
                 .addPathPatterns(
                         "/user/**");
+        registry.addInterceptor(new OriginCrossInterceptor());
     }
 
     /**
