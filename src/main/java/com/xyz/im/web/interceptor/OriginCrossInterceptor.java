@@ -13,8 +13,6 @@ import javax.servlet.http.HttpServletResponse;
  * @Author liutong
  * @Date 2020/8/21
  */
-@Component
-@Order(value = 0)
 public class OriginCrossInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {

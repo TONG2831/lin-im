@@ -64,7 +64,6 @@ public class Application extends WebMvcConfigurationSupport {
         registry.addInterceptor(authInterceptor)
                 .addPathPatterns(
                         "/user/**");
-        registry.addInterceptor(new OriginCrossInterceptor());
     }
 
     /**
