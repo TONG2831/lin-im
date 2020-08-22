@@ -49,4 +49,14 @@ public class GroupService {
         return groups.stream().map(GroupUtils::convert2Contact).collect(Collectors.toList());
     }
 
+    /**
+     * 查询群用户列表
+     *
+     * @param groupId 群id
+     * @return 群用户列表
+     */
+    public List<GroupMember> queryGroupMembers(long groupId) {
+        return groupMemberMapper.selectByGroupId(groupId);
+    }
+
 }

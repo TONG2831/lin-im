@@ -17,5 +17,6 @@ public class BizActionStatus extends ActionStatus {
     }
 
     public static final BizActionStatus DEMO = new BizActionStatus(10001, "demo");
+    public static final BizActionStatus IM_EX = new BizActionStatus(1008, "im ex");
 
 }

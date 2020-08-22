@@ -32,4 +32,6 @@ public interface GroupMemberMapper {
 
     List<GroupMember> selectByUid(@Param("uid") long uid);
 
+    List<GroupMember> selectByGroupId(@Param("groupId") long groupId);
+
 }

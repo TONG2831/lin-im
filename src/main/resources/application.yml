@@ -29,3 +29,6 @@ spring:
 
 logging:
   config: classpath:config/${spring.profiles.active}/logback.xml
+
+netty:
+  port: 8081
