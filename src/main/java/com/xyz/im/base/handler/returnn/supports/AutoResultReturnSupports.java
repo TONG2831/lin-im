@@ -52,13 +52,14 @@ public interface AutoResultReturnSupports {
             Long startTime = Constant.START_TIME.get();
             if (startTime != null) {
                 jsonResult.setCost(System.currentTimeMillis() - startTime + "ms");
-                Constant.START_TIME.remove();
             }
             writer.print(JSON.toJSONString(jsonResult));
             writer.flush();
         } catch (IOException e) {
             SysLogUtils.error("#AutoResultReturnHandler io handler ex ", e);
             throw new BusinessException("服务器开小差，请稍后再试");
+        } finally {
+            Constant.START_TIME.remove();
         }
     }
 }
