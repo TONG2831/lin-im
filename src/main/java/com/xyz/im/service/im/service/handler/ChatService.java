@@ -64,6 +64,8 @@ public class ChatService {
 
         channelMap.remove(ctx);
         onlineUserMap.remove(uid);
+        ImLogUtils.info("uid={} 用户下线，当前在线人数为：{}"
+                , uid, onlineUserMap.size());
     }
 
     /**
