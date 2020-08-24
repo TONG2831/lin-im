@@ -5,6 +5,7 @@
     <property name="LOG_PATH" value="/usr/logs/im"/>
     <property name="LOG_NAME" value="im"/>
     <property name="SYS_LOG_NAME" value="im-system"/>
+    <property name="IM_LOG_NAME" value="im-im"/>
 
 
     <!-- 输出到控制台 -->
@@ -60,6 +61,23 @@
         </rollingPolicy>
     </appender>
 
+    <appender name="IM_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}${file.separator}${IM_LOG_NAME}.log</file>
+        <append>true</append>
+        <!-- 打印日志的格式 -->
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{40} - %msg%n
+            </pattern>
+        </encoder>
+        <!-- 滚动策略 设置生成新日志文件的策略 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}${file.separator}history-im${file.separator}%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>180</maxHistory>
+        </rollingPolicy>
+    </appender>
+
     <root level="INFO">
         <appender-ref ref="fileLog"/>
         <appender-ref ref="stdout"/>
@@ -74,6 +92,12 @@
     <!-- 系统级日志 -->
     <logger name="SystemLogger" level="INFO" additivity="false">
         <appender-ref ref="SYS_LOG"/>
+        <appender-ref ref="stdout"/>
+    </logger>
+
+    <!-- im日志 -->
+    <logger name="ImLogger" level="INFO" additivity="false">
+        <appender-ref ref="IM_LOG"/>
         <appender-ref ref="stdout"/>
     </logger>
 

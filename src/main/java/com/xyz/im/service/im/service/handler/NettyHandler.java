@@ -1,12 +1,12 @@
 package com.xyz.im.service.im.service.handler;
 
 import com.alibaba.fastjson.JSON;
+import com.xyz.im.base.log.ImLogUtils;
 import com.xyz.im.service.im.dto.MsgReqBody;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -18,7 +18,6 @@ import javax.annotation.Resource;
  * @date 2020/8/14
  */
 @Service
-@Slf4j
 @ChannelHandler.Sharable
 public class NettyHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
 
@@ -36,7 +35,7 @@ public class NettyHandler extends SimpleChannelInboundHandler<TextWebSocketFrame
         try {
             // 取出消息体 根据消息体信息 决定消息发送
             MsgReqBody msgReqBody = JSON.parseObject(msg.text(), MsgReqBody.class);
-            log.info("收到消息 msg={}", msgReqBody);
+            ImLogUtils.info("收到消息 msg={}", msgReqBody);
 
             switch (msgReqBody.getMsgType()) {
                 case REGISTER:
@@ -53,7 +52,7 @@ public class NettyHandler extends SimpleChannelInboundHandler<TextWebSocketFrame
                     break;
             }
         } catch (Exception e) {
-            log.warn("msg={}", msg.text());
+            ImLogUtils.warn("msg={}", msg.text());
             MsgSendUtils.sendErrorMessage(ctx, "发送消息有误，请稍后再试");
         }
     }

@@ -1,12 +1,12 @@
 package com.xyz.im.service.im.service.handler;
 
+import com.xyz.im.base.log.ImLogUtils;
 import com.xyz.im.domain.GroupMember;
 import com.xyz.im.service.group.service.GroupService;
 import com.xyz.im.service.im.dto.MsgReqBody;
 import com.xyz.im.service.im.dto.MsgRespBody;
 import com.xyz.im.service.im.enums.MsgType;
 import io.netty.channel.ChannelHandlerContext;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * @date 2020-08-22
  */
 @Service
-@Slf4j
 public class ChatService {
 
     @Resource
@@ -47,7 +46,7 @@ public class ChatService {
                 .msgType(MsgType.REGISTER)
                 .build();
         MsgSendUtils.sendMessage(ctx, msgRespBody);
-        log.info("uid={} 登记到在线用户表，当前在线人数为：{}"
+        ImLogUtils.info("uid={} 登记到在线用户表，当前在线人数为：{}"
                 , msgReqBody.getFrom(), onlineUserMap.size());
     }
 
@@ -59,7 +58,7 @@ public class ChatService {
     public void remove(ChannelHandlerContext ctx) {
         Long uid = channelMap.get(ctx);
         if (Objects.isNull(uid)) {
-            log.warn("未找到连接 下线操作失败 {}", ctx);
+            ImLogUtils.warn("未找到连接 下线操作失败 {}", ctx);
             return;
         }
 

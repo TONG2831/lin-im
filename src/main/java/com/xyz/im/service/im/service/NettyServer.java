@@ -1,11 +1,11 @@
 package com.xyz.im.service.im.service;
 
+import com.xyz.im.base.log.ImLogUtils;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
@@ -22,7 +22,6 @@ import javax.annotation.Resource;
  * @date 2020/8/14
  */
 @Component
-@Slf4j
 public class NettyServer {
 
     @Value("${netty.port}")
@@ -40,7 +39,7 @@ public class NettyServer {
     @PostConstruct
     public void start() {
         nettyExecutor.execute(() -> {
-            log.info("netty websocket start ");
+            ImLogUtils.info("netty websocket start ");
             //创建主线程组，接收请求
             EventLoopGroup bossGroup = new NioEventLoopGroup();
             //创建从线程组，处理主线程组分配下来的io操作
@@ -56,7 +55,7 @@ public class NettyServer {
                 //监听关闭channel
                 channelFuture.channel().closeFuture().sync();
             } catch (Exception e) {
-                log.warn("netty websocket ex", e);
+                ImLogUtils.warn("netty websocket ex", e);
             } finally {
                 //关闭主线程
                 bossGroup.shutdownGracefully();
@@ -71,7 +70,7 @@ public class NettyServer {
      */
     @PreDestroy
     public void close() {
-        log.error("netty websocket close");
+        ImLogUtils.error("netty websocket close");
         nettyExecutor.shutdown();
     }
 
