@@ -97,4 +97,29 @@ public class ChatService {
         });
     }
 
+    /**
+     * 好友信息发送
+     *
+     * @param msgReqBody 消息体
+     * @param ctx        用户本次连接上下文
+     */
+    public void friendSend(MsgReqBody msgReqBody, ChannelHandlerContext ctx) {
+        // 获取好友连接
+        long friendId = NumberUtils.toLong(msgReqBody.getTo());
+        ChannelHandlerContext friendCtx = onlineUserMap.get(friendId);
+
+        // 目前只考虑在线情况
+        if (Objects.nonNull(friendCtx)) {
+            MsgRespBody msgRepsBody = MsgRespBody.builder()
+                    .msgType(MsgType.SEND_SINGLE)
+                    .msg(msgReqBody.getMsg())
+                    .from(msgReqBody.getFrom())
+                    .to(msgReqBody.getTo())
+                    .build();
+            MsgSendUtils.sendMessage(friendCtx, msgRepsBody);
+        } else {
+            MsgSendUtils.sendErrorMessage(ctx, "好友不在线");
+        }
+    }
+
 }

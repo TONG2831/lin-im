@@ -45,28 +45,17 @@ public class NettyHandler extends SimpleChannelInboundHandler<TextWebSocketFrame
                     chatService.groupSend(msgReqBody, ctx);
                     break;
                 case SEND_SINGLE:
-                    MsgSendUtils.sendErrorMessage(ctx, "暂不支持该类型消息");
+                    chatService.friendSend(msgReqBody, ctx);
                     break;
                 default:
                     MsgSendUtils.sendErrorMessage(ctx, "发送消息有误，请稍后再试");
                     break;
             }
         } catch (Exception e) {
-            ImLogUtils.warn("msg={}", msg.text());
+            ImLogUtils.warn("im read msg ex, msg={}", msg.text(), e);
             MsgSendUtils.sendErrorMessage(ctx, "发送消息有误，请稍后再试");
         }
     }
-
-//    /**
-//     * 客户端建立连接
-//     *
-//     * @param ctx
-//     */
-//    @Override
-//    public void handlerAdded(ChannelHandlerContext ctx) {
-//        // 查出用户所在群 对应群注入客户端连接
-//        log.info(ctx.channel().remoteAddress() + "上线了!");
-//    }
 
     /**
      * 关闭连接
@@ -86,7 +75,7 @@ public class NettyHandler extends SimpleChannelInboundHandler<TextWebSocketFrame
      */
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-        cause.printStackTrace();
+        ImLogUtils.warn("im exceptionCaught", cause);
         ctx.close();
     }
 
