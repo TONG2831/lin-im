@@ -40,6 +40,4 @@ public class Constant {
 
     public static final int IP_LENGTH = 15;
 
-    public static final ThreadLocal<Long> START_TIME = new ThreadLocal<>();
-
 }

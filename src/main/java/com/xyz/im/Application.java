@@ -1,10 +1,11 @@
 package com.xyz.im;
 
-import com.xyz.im.base.handler.param.RequestAttributeParamResolver;
+import com.xyz.bu.handler.param.RequestAttributeParamResolver;
 import com.xyz.im.base.log.SysLogUtils;
 import com.xyz.im.web.interceptor.AuthInterceptor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -28,6 +29,7 @@ import java.util.List;
 @PropertySource("classpath:config.properties")
 @ImportResource("classpath:config/${spring.profiles.active}/applicationContext-quartz.xml")
 @EnableTransactionManagement
+@ComponentScan({"com.xyz"})
 public class Application extends WebMvcConfigurationSupport {
 
     public static void main(String[] args) {

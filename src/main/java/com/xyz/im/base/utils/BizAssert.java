@@ -1,6 +1,6 @@
 package com.xyz.im.base.utils;
 
-import com.xyz.im.base.exception.BusinessException;
+import com.xyz.bu.exception.BusinessException;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 

@@ -175,6 +175,14 @@
             <artifactId>netty-all</artifactId>
             <version>${netty.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.xyz</groupId>
+            <artifactId>xyz-base</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/xyz-base-1.0.0.jar</systemPath>
+        </dependency>
     </dependencies>
 
     <build>
@@ -203,6 +211,13 @@
                     <include>**/*.txt</include>
                 </includes>
                 <filtering>false</filtering>
+            </resource>
+            <resource>
+                <directory>lib</directory>
+                <targetPath>/BOOT-INF/lib/</targetPath>
+                <includes>
+                    <include>**/*.jar</include>
+                </includes>
             </resource>
         </resources>
         <plugins>

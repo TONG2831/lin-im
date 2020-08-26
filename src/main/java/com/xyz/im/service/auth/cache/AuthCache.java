@@ -1,7 +1,7 @@
 package com.xyz.im.service.auth.cache;
 
 import com.alibaba.fastjson.JSON;
-import com.xyz.im.base.cache.MyRedisTemplate;
+import com.xyz.bu.cache.MyRedisTemplate;
 import com.xyz.im.base.cache.RedisKey;
 import com.xyz.im.base.common.Constant;
 import com.xyz.im.service.auth.dto.AuthUser;

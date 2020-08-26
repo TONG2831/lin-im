@@ -1,11 +1,11 @@
 package com.xyz.im.web.interceptor;
 
 import com.alibaba.fastjson.JSON;
-import com.xyz.im.base.common.ActionStatus;
-import com.xyz.im.base.common.CommonCookieParams;
-import com.xyz.im.base.common.CommonParams;
-import com.xyz.im.base.exception.BusinessException;
-import com.xyz.im.base.handler.returnn.JsonResult;
+import com.xyz.bu.common.ActionStatus;
+import com.xyz.bu.common.CommonCookieParams;
+import com.xyz.bu.common.CommonParams;
+import com.xyz.bu.exception.BusinessException;
+import com.xyz.bu.handler.returnn.JsonResult;
 import com.xyz.im.base.utils.IpUtils;
 import com.xyz.im.service.auth.cache.AuthCache;
 import com.xyz.im.service.auth.dto.AuthUser;

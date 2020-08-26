@@ -1,9 +1,9 @@
 package com.xyz.im.service.im.service.handler;
 
 import com.alibaba.fastjson.JSON;
-import com.xyz.im.base.common.ActionStatus;
+import com.xyz.bu.common.ActionStatus;
+import com.xyz.bu.handler.returnn.JsonResult;
 import com.xyz.im.base.common.BizActionStatus;
-import com.xyz.im.base.handler.returnn.JsonResult;
 import com.xyz.im.service.im.dto.MsgRespBody;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;

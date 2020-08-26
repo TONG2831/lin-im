@@ -1,6 +1,6 @@
 package com.xyz.im.web.aspect;
 
-import com.xyz.im.base.common.Constant;
+import com.xyz.bu.common.BaseConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -26,7 +26,7 @@ public class ControllerAspect {
      */
     @Before("execution(* com.xyz.im.web.controller..*Controller.*(..))")
     public void doBefore(JoinPoint joinPoint) {
-        Constant.START_TIME.set(System.currentTimeMillis());
+        BaseConstant.START_TIME.set(System.currentTimeMillis());
     }
 
 }

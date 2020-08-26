@@ -1,5 +1,7 @@
 package com.xyz.im.base.common;
 
+import com.xyz.bu.common.ActionStatus;
+
 /**
  * 业务用
  *

@@ -1,8 +1,8 @@
 package com.xyz.im.service.user.service;
 
-import com.xyz.im.base.common.CommonCookieParams;
+import com.xyz.bu.common.CommonCookieParams;
+import com.xyz.bu.exception.BusinessException;
 import com.xyz.im.base.common.Constant;
-import com.xyz.im.base.exception.BusinessException;
 import com.xyz.im.base.utils.EncryptUtils;
 import com.xyz.im.dao.general.AccountMapper;
 import com.xyz.im.dao.general.UserMapper;

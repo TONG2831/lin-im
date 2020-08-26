@@ -1,8 +1,8 @@
 package com.xyz.im.web.exception;
 
-import com.xyz.im.base.common.ActionStatus;
-import com.xyz.im.base.exception.BusinessException;
-import com.xyz.im.base.handler.returnn.JsonResult;
+import com.xyz.bu.common.ActionStatus;
+import com.xyz.bu.exception.BusinessException;
+import com.xyz.bu.handler.returnn.JsonResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

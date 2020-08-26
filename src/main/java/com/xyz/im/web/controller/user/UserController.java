@@ -1,7 +1,7 @@
 package com.xyz.im.web.controller.user;
 
-import com.xyz.im.base.common.CommonParams;
-import com.xyz.im.base.handler.param.RequestAttributeParam;
+import com.xyz.bu.common.CommonParams;
+import com.xyz.bu.handler.param.RequestAttributeParam;
 import com.xyz.im.base.utils.BizAssert;
 import com.xyz.im.service.common.dto.ContactDto;
 import com.xyz.im.service.common.enums.ContactType;
