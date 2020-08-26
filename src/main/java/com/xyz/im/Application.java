@@ -1,7 +1,6 @@
 package com.xyz.im;
 
 import com.xyz.im.base.handler.param.RequestAttributeParamResolver;
-import com.xyz.im.base.log.ImLogUtils;
 import com.xyz.im.base.log.SysLogUtils;
 import com.xyz.im.web.interceptor.AuthInterceptor;
 import org.springframework.boot.SpringApplication;
@@ -43,7 +42,6 @@ public class Application extends WebMvcConfigurationSupport {
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
         SysLogUtils.info("config static resource");
-        ImLogUtils.info("sss");
 
         // http://{ip}:{port}/swagger-ui.html
         registry.addResourceHandler("swagger-ui.html").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX + "/META-INF/resources/");
