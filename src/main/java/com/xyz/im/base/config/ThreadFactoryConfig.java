@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
-import java.util.concurrent.Executor;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * @author xyz
@@ -16,14 +16,13 @@ import java.util.concurrent.Executor;
 public class ThreadFactoryConfig {
 
     @Bean("taskExecutor")
-    public Executor taskExecutor() {
+    public ThreadPoolTaskExecutor taskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(16);
-        executor.setKeepAliveSeconds(60);
         executor.setMaxPoolSize(16);
         executor.setQueueCapacity(2048);
-        executor.setThreadNamePrefix("taskService-");
-        executor.initialize();
+        executor.setThreadNamePrefix("taskExecutor-");
+        executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
         return executor;
     }
 
@@ -31,7 +30,6 @@ public class ThreadFactoryConfig {
     public ThreadPoolTaskExecutor nettyExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(1);
-        executor.setKeepAliveSeconds(0);
         executor.setMaxPoolSize(1);
         executor.setQueueCapacity(0);
         executor.setThreadNamePrefix("nettyTPool-");

@@ -30,5 +30,12 @@ spring:
 logging:
   config: classpath:config/${spring.profiles.active}/logback.xml
 
+# netty 配置
 netty:
   port: 8081
+
+# 队列配置
+queue:
+  executor:
+    enable: true
+    size: 8
