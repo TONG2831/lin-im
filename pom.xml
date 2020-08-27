@@ -181,7 +181,7 @@
             <artifactId>xyz-base</artifactId>
             <version>1.0.0</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/xyz-base-1.0.0.jar</systemPath>
+            <systemPath>${basedir}/lib/xyz-base-1.0.0.jar</systemPath>
         </dependency>
     </dependencies>
 
