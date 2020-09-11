@@ -3,8 +3,12 @@ package com.xyz.im.base.config;
 import com.xyz.bu.handler.param.RequestAttributeParamResolver;
 import com.xyz.im.base.log.SysLogUtils;
 import com.xyz.im.web.interceptor.AuthInterceptor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.ResourceUtils;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.servlet.config.annotation.*;
@@ -22,21 +26,21 @@ import java.util.List;
 @EnableWebMvc
 public class WebMvcConfig implements WebMvcConfigurer {
 
-    @Resource
-    private AuthInterceptor authInterceptor;
-
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        // 设置允许跨域的路径
-        registry.addMapping("/**")
-                // 设置允许跨域请求的域名
-                .allowedOrigins("*")
-                // 是否允许证书 不再默认开启
-                .allowCredentials(true)
-                // 设置允许的方法
-                .allowedMethods("*")
-                // 跨域允许时间
-                .maxAge(3600);
+    @Bean
+    public CorsFilter corsFilter() {
+        CorsConfiguration config = new CorsConfiguration();
+        // 设置允许跨域请求的域名
+        config.addAllowedOrigin("*");
+        // 是否允许证书 不再默认开启
+        // config.setAllowCredentials(true);
+        // 设置允许的方法
+        config.addAllowedMethod("*");
+        // 允许任何头
+        config.addAllowedHeader("*");
+        config.addExposedHeader("token");
+        UrlBasedCorsConfigurationSource configSource = new UrlBasedCorsConfigurationSource();
+        configSource.registerCorsConfiguration("/**", config);
+        return new CorsFilter(configSource);
     }
 
     /**
@@ -54,6 +58,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/webjars/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX + "/META-INF/resources/webjars/");
         registry.addResourceHandler("/static/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX + "/static/");
     }
+
+    @Resource
+    private AuthInterceptor authInterceptor;
 
     /**
      * 注册拦截器
