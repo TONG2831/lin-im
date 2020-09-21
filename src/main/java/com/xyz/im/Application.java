@@ -2,7 +2,6 @@ package com.xyz.im;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -16,7 +15,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @PropertySource("classpath:config.properties")
 @ImportResource("classpath:config/${spring.profiles.active}/applicationContext-quartz.xml")
 @EnableTransactionManagement
-@ComponentScan({"com.xyz"})
+//@ComponentScan("com.xyz.im")
 public class Application {
 
     public static void main(String[] args) {
